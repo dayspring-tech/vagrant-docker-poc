@@ -1,0 +1,39 @@
+<VirtualHost *:80>
+  ServerName <%= @params[:server_name] %>
+  <% if @params[:server_aliases] && !@params[:server_aliases].empty? -%>
+  ServerAlias <% @params[:server_aliases].each do |a| %><%= "#{a}" %> <% end %>
+  <% end -%>
+  DocumentRoot <%= @params[:docroot] %>
+
+  <Directory <%= @params[:docroot] %>>
+    Options FollowSymLinks
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+  </Directory>
+
+  <Directory ~ "\.svn">
+    Order allow,deny
+    Deny from all
+  </Directory>
+
+  <Directory ~ "\.git">
+    Order allow,deny
+    Deny from all
+  </Directory>
+
+  LogLevel info
+  ErrorLog <%= node[:apache][:log_dir] %>/<%= @params[:name] %>-error.log
+  CustomLog <%= node[:apache][:log_dir] %>/<%= @params[:name] %>-access.log combined
+  CustomLog <%= node[:apache][:log_dir] %>/<%= @params[:name] %>-ganglia.log ganglia
+
+  FileETag none
+
+  <% if @params[:mounted_at] -%>
+  AliasMatch ^<%= @params[:mounted_at] %>/(.*)$ <%= @params[:docroot] %>$1
+  <% end -%>
+
+  # disable sendfile
+  # https://www.vagrantup.com/docs/synced-folders/virtualbox.html
+  EnableSendfile off
+</VirtualHost>

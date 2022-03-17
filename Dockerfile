@@ -56,7 +56,14 @@ RUN dnf -y install php \
   httpd \
   nodejs
 RUN npm i -g npm
+
+# Setup of httpd / php-hpm
+COPY vagrant/files/docker/httpd.default.conf /etc/httpd/conf/httpd.conf
+RUN mkdir -p /etc/httpd/sites-available
+RUN mkdir -p /etc/httpd/sites-enabled
+COPY vagrant/files/docker/php-fpm-www-override.conf /etc/php-fpm.d/z-www-override.conf
 RUN systemctl enable httpd
+RUN systemctl enable php-fpm
 
 RUN printf "# composer php cli ini settings\n\
 date.timezone=UTC\n\
@@ -65,7 +72,7 @@ memory_limit=-1\n\
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_HOME /tmp
-ENV COMPOSER_VERSION 1.9.2
+ENV COMPOSER_VERSION 2.2.9
 ENV COMPOSER_INSTALLER_URL https://raw.githubusercontent.com/composer/getcomposer.org/cb19f2aa3aeaa2006c0cd69a7ef011eb31463067/web/installer
 ENV COMPOSER_INSTALLER_HASH 48e3236262b34d30969dca3c37281b3b4bbe3221bda826ac6a9a62d6444cdb0dcd0615698a5cbe587c3f0fe57a54d8f5
 
@@ -85,8 +92,8 @@ RUN set -eux; \
   find /tmp -type d -exec chmod -v 1777 {} +
 
 # install phpunit
-RUN wget https://phar.phpunit.de/phpunit-6.1.phar && \
-    chmod +x phpunit-6.1.phar && \
-    mv phpunit-6.1.phar /usr/local/bin/phpunit
+RUN wget https://phar.phpunit.de/phpunit-9.5.phar && \
+    chmod +x phpunit-9.5.phar && \
+    mv phpunit-9.5.phar /usr/local/bin/phpunit
 
 CMD /usr/bin/systemctl

@@ -45,6 +45,7 @@ Vagrant.configure("2") do |config|
     chef.product = "chef-workstation"
     chef.cookbooks_path = ["./vagrant/cookbooks"]
 
+    chef.add_recipe "webapp"
     chef.add_recipe "before_symlink"
   end
 end
