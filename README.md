@@ -11,9 +11,9 @@ This example has a Dockerfile that will set up the image with nginx.  To use in
 your project you would most likely fill out the Dockerfile to creat an image with
 the web server, php, node, etc. set up ready for recipes to be run.
 
-NOTE: this is using the Fedora image because Fedora provides an image that will
+_NOTE: this is using the Fedora image because Fedora provides an image that will
 run on either x86 or M1 mac architectures. Also looking forward to Amazon Linux 2022
-which will remove CentOS and RHEL and will be based directly on Fedora.
+which will remove CentOS and RHEL and will be based directly on Fedora._
 
 ## How to use
 
@@ -36,3 +36,6 @@ and you can log into the VM with:
 
 There is also a webserver running at `http://localhost:8080`
 
+**NOTE: That there is something still to fix. The first time you run up you will need 
+to: `vagrant halt && vagrant up` For some reason httpd is not starting during the first 
+startup.**
