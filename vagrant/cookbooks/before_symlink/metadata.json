@@ -1,0 +1,31 @@
+{
+  "name": "before_symlink",
+  "description": "Run before_symlink common runlist",
+  "long_description": "Run before_symlink common runlist",
+  "maintainer": "Matthew Denson",
+  "maintainer_email": "mdenson@dayspringparters.com",
+  "license": "All rights reserved",
+  "platforms": {
+  },
+  "dependencies": {
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+  },
+  "groupings": {
+  },
+  "recipes": {
+  },
+  "version": "1.0.0",
+  "source_url": "",
+  "issues_url": ""
+}
