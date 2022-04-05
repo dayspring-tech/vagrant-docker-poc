@@ -1,0 +1,1 @@
+LoadModule mpm_event_module /usr/lib64/httpd/modules/mod_mpm_event.so
