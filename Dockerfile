@@ -17,7 +17,8 @@ RUN yum -y install procps \
   wget \
   git \
   ruby \
-  libxcrypt-compat
+  libxcrypt-compat \
+  unzip
 
 # Add sshd server so we can 'vagrant ssh' later
 RUN yum -y install openssh-server openssh-clients passwd sudo; 
